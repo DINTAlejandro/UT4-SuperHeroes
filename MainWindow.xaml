@@ -1,0 +1,42 @@
+﻿<Window x:Class="UT4_Superheroes.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UT4_Superheroes"
+        xmlns:modelos="clr-namespace:UT4_Superheroes.Modelo"
+        mc:Ignorable="d"
+        Title="Superhéroes" MinHeight="450" MinWidth="600" Height="600" Width="800" Icon="Assets/shield.ico">
+    <Window.Resources>
+        <modelos:ConvertidorVengador x:Key="conversorVengadores"></modelos:ConvertidorVengador>
+        <modelos:ConvertidorXmen x:Key="conversorXmen"></modelos:ConvertidorXmen>
+        <modelos:ConvertidorVillano x:Key="conversorVillano"></modelos:ConvertidorVillano>
+    </Window.Resources>
+    <DockPanel x:Name="dp_superheroes" Background="{Binding Converter={StaticResource conversorVillano}, Path=Heroe}">
+        <DockPanel  Height="60" LastChildFill="False" DockPanel.Dock="top">
+            <TextBlock Margin="10,0,0,0" FontWeight="Bold" Foreground="White" FontSize="40" DockPanel.Dock="Left" Text="{Binding Path=Nombre}">
+                <TextBlock.Effect>
+                    <DropShadowEffect/>
+                </TextBlock.Effect></TextBlock>
+            <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+                <Image Source="{Binding Converter={StaticResource conversorXmen}, Path=Xmen}" ></Image>
+                <Image Source="{Binding Converter={StaticResource conversorVengadores}, Path=Vengador}" ></Image>
+            </StackPanel>
+        </DockPanel>
+        <StackPanel Orientation="Horizontal" Height="40" DockPanel.Dock="Bottom" VerticalAlignment="Center" HorizontalAlignment="center">
+            <Image Name="img_atras" Source="Assets/arrow.png" RenderTransformOrigin="0.5,0.5" MouseDown="img_atras_MouseDown"/>
+            <TextBlock x:Name="tbx_numeroPagina" Text="1" FontSize="24"></TextBlock><TextBlock Text="/3" FontSize="24"></TextBlock>
+            <Image Name="img_adelante" Source="Assets/arrow.png" RenderTransformOrigin="0.5,0.5" MouseDown="img_adelante_MouseDown">
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="180"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
+        </StackPanel>
+        <Image Margin="10"  Stretch="UniformToFill" Source="{Binding Path=Imagen}"></Image>
+    </DockPanel>
+</Window>
